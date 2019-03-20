@@ -125,16 +125,16 @@
                     "nationality": str(data.nationality),
                     "dob": str(data.dob),
                     "email": str(data.email),
-                    "mobileno": str(data.mobileno.prefix) + str(data.mobileno.code) + " " + str(data.mobileno.nbr),
-                    "regadd": str(data.regadd.block) + " " +
-															str(data.regadd.building) + " \n" +
-															"#" + str(data.regadd.floor) + "-" +  str(data.regadd.unit) + " " +
-															str(data.regadd.street) + " \n" +
-															"Singapore " + str(data.regadd.postal),
+                    "mobileno": str(data.mobileno.prefix) + str(data.mobileno.areacode) + " " + str(data.mobileno.nbr),
+                    "regadd": str(data.regadd["address-sg"].block) + " " +
+															str(data.regadd["address-sg"].building) + " \n" +
+															"#" + str(data.regadd["address-sg"].floor) + "-" +  str(data.regadd["address-sg"].unit) + " " +
+															str(data.regadd["address-sg"].street) + " \n" +
+															"Singapore " + str(data.regadd["address-sg"].postal),
                     "housingtype": str(data.housingtype)==undefined ? str(data.hdbtype) : str(data.housingtype),
                     "marital": str(data.marital),
                     "edulevel": str(data.edulevel),
-                    "assessableincome": str(data.assessableincome).replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ","),
+                    "assessableincome": str(data["noa-basic"].list[0].amount) ? str(data["noa-basic"].list[0].amount).replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "",
                 };
 
             // Populate values
@@ -171,12 +171,16 @@
 
 		// used to output data items with value or desc
 		function str(data) {
+			if (!data)
+				return null;
 			if (data.value)
 				return data.value;
 			else if (data.desc)
 				return data.desc;
 			else if (typeof data == "string")
 				return data;
+			else
+				return "";
 		}
 
 
