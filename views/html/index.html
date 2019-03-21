@@ -99,7 +99,7 @@
                 	// successful response from serverside
 					if (data.status == "OK") { // successful
 						// fill up the application form
-						console.log("data",data);
+						// console.log("data",data);
 						prefillForm(data.text);
 					} else {
 						// error occured
@@ -131,15 +131,26 @@
 															"#" + str(data.regadd["address-sg"].floor) + "-" +  str(data.regadd["address-sg"].unit) + " " +
 															str(data.regadd["address-sg"].street) + " \n" +
 															"Singapore " + str(data.regadd["address-sg"].postal),
-                    "housingtype": str(data.housingtype)==undefined ? str(data.hdbtype) : str(data.housingtype),
+                    "housingtype": str(data.housingtype)=="" ? str(data.hdbtype) : str(data.housingtype),
                     "marital": str(data.marital),
                     "edulevel": str(data.edulevel),
-                    "assessableincome": str(data["noa-basic"].list[0].amount) ? str(data["noa-basic"].list[0].amount).replace(/,/g, "").replace(/\B(?=(\d{3})+(?!\d))/g, ",") : "",
+                    "assessableincome": str(data["noa-basic"].list[0].amount) ? formatMoney( str(data["noa-basic"].list[0].amount), 2, ".", ",") : "",
                 };
 
             // Populate values
 			populate('#formApplication', formValues);
 
+		}
+
+		function formatMoney(n, c, d, t) {
+		  var c = isNaN(c = Math.abs(c)) ? 2 : c,
+		    d = d == undefined ? "." : d,
+		    t = t == undefined ? "," : t,
+		    s = n < 0 ? "-" : "",
+		    i = String(parseInt(n = Math.abs(Number(n) || 0).toFixed(c))),
+		    j = (j = i.length) > 3 ? j % 3 : 0;
+
+		  return s + (j ? i.substr(0, j) + t : "") + i.substr(j).replace(/(\d{3})(?=\d)/g, "$1" + t) + (c ? d + Math.abs(n - i).toFixed(c).slice(2) : "");
 		}
 
 		function getParameterByName(name, url) {
