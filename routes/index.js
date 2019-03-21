@@ -87,6 +87,8 @@ router.post('/getPersonData', function(req, res, next) {
     .end(function(callErr, callRes) {
       if (callErr) {
         // ERROR
+        console.error("Token Call Error: ",callErr.status);
+        console.error(callErr.response.req.res.text);
         res.jsonp({
           status: "ERROR",
           msg: callErr
@@ -146,7 +148,7 @@ function callPersonAPI(accessToken, res) {
     .buffer(true)
     .end(function(callErr, callRes) {
       if (callErr) {
-        console.error("ERROR",callErr.status);
+        console.error("Person Call Error: ",callErr.status);
         console.error(callErr.response.req.res.text);
         res.jsonp({
           status: "ERROR",
@@ -259,7 +261,7 @@ function createTokenRequest(code) {
   var authHeaders = null;
   if (_authLevel == "L0") {
     // No headers
-  } else if (_authLevel == "L2" || _authLevel == "L2v3" ) {
+  } else if (_authLevel == "L2") {
     authHeaders = securityHelper.generateAuthorizationHeader(
       _tokenApiUrl,
       params,
