@@ -99,7 +99,7 @@
                 	// successful response from serverside
 					if (data.status == "OK") { // successful
 						// fill up the application form
-						// console.log("data",data);
+						console.log("data",data);
 						prefillForm(data.text);
 					} else {
 						// error occured
@@ -126,7 +126,8 @@
                     "dob": str(data.dob),
                     "email": str(data.email),
                     "mobileno": str(data.mobileno.prefix) + str(data.mobileno.areacode) + " " + str(data.mobileno.nbr),
-                    "regadd": str(data.regadd["address-sg"].block) + " " +
+                    "regadd": str(data.regadd["address-sg"].country)=="" ? "" :
+															str(data.regadd["address-sg"].block) + " " +
 															str(data.regadd["address-sg"].building) + " \n" +
 															"#" + str(data.regadd["address-sg"].floor) + "-" +  str(data.regadd["address-sg"].unit) + " " +
 															str(data.regadd["address-sg"].street) + " \n" +
