@@ -19,11 +19,8 @@ process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0";
 // Setup Configuration
 // ####################
 
-
-// LOADED FRON ENV VARIABLE: public key from MyInfo given to you during onboarding for RSA digital signature
-var _myinfoPublicCertContent = process.env.MYINFO_VERIFY_JWS_SIGNATURE_CERT_PUBLIC_CERT;
 // LOADED FRON ENV VARIABLE: public key from MyInfo Consent Platform given to you during onboarding for RSA digital signature
-var _publicCertContent = process.env.MYINFO_CONSENTPLATFORM_SIGNATURE_CERT_PUBLIC_CERT;
+var _publicCertContent = process.env.MYINFO_SIGNATURE_CERT_PUBLIC_CERT;
 // LOADED FRON ENV VARIABLE: your private key for RSA digital signature
 var _privateKeyContent = process.env.DEMO_APP_SIGNATURE_CERT_PRIVATE_KEY;
 // LOADED FRON ENV VARIABLE: your client_id provided to you during onboarding
@@ -207,7 +204,7 @@ function callPersonAPI(accessToken, res) {
                 console.log("Person Data (JWS):".green);
                 console.log(JSON.stringify(personDataJWS));
 
-                var decodedPersonData = securityHelper.verifyJWS(personDataJWS, _myinfoPublicCertContent);
+                var decodedPersonData = securityHelper.verifyJWS(personDataJWS, _publicCertContent);
                 if (decodedPersonData == undefined || decodedPersonData == null) {
                   res.jsonp({
                     status: "ERROR",
