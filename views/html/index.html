@@ -120,19 +120,19 @@
 			var noaData = "";
 			var address = "";
 			if(data["noa-basic"]){
-				noaData = str(data["noa-basic"].list[0].amount) ? formatMoney( str(data["noa-basic"].list[0].amount), 2, ".", ",") : "";
+				noaData = str(data["noa-basic"].amount) ? formatMoney( str(data["noa-basic"].amount), 2, ".", ",") : "";
 			}
-			if(data.regadd["address-sg"]){
-				address = str(data.regadd["address-sg"].country)=="" ? "" :
-									str(data.regadd["address-sg"].block) + " " +
-									str(data.regadd["address-sg"].building) + " \n" +
-									"#" + str(data.regadd["address-sg"].floor) + "-" +  str(data.regadd["address-sg"].unit) + " " +
-									str(data.regadd["address-sg"].street) + " \n" +
-									"Singapore " + str(data.regadd["address-sg"].postal)
+			if(data.regadd.type == "SG"){
+				address = str(data.regadd.country)=="" ? "" :
+									str(data.regadd.block) + " " +
+									str(data.regadd.building) + " \n" +
+									"#" + str(data.regadd.floor) + "-" +  str(data.regadd.unit) + " " +
+									str(data.regadd.street) + " \n" +
+									"Singapore " + str(data.regadd.postal)
 			}
-			if(data.regadd["address-unformatted"]){
-				address = str(data.regadd["address-unformatted"].line1) + "\n" +
-				 					str(data.regadd["address-unformatted"].line2)
+			else if(data.regadd.type == "Unformatted"){
+				address = str(data.regadd.line1) + "\n" +
+				 					str(data.regadd.line2)
 			}
       var formValues = {
               "uinfin":data.uinfin,
