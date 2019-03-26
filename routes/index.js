@@ -29,8 +29,7 @@ var _clientId = process.env.MYINFO_APP_CLIENT_ID;
 var _clientSecret = process.env.MYINFO_APP_CLIENT_SECRET;
 // redirect URL for your web application
 var _redirectUrl = process.env.MYINFO_APP_REDIRECT_URL;
-// default realm for your web application
-var _realm = process.env.MYINFO_APP_REALM;
+
 
 // URLs for MyInfo APIs
 var _authLevel = process.env.AUTH_LEVEL;
@@ -267,8 +266,7 @@ function createTokenRequest(code) {
       _authLevel,
       _clientId,
       _privateKeyContent,
-      _clientSecret,
-      _realm
+      _clientSecret
     );
   } else {
     throw new Error("Unknown Auth Level");
@@ -319,8 +317,7 @@ function createPersonRequest(uinfin, validToken) {
     _authLevel,
     _clientId,
     _privateKeyContent,
-    _clientSecret,
-    _realm
+    _clientSecret
   );
 
   // NOTE: include access token in Authorization header as "Bearer " (with space behind)
