@@ -176,10 +176,7 @@ function callPersonAPI(accessToken, res) {
                 msg: "INVALID DATA OR SIGNATURE FOR PERSON DATA"
               });
             }
-
-
-            console.log("Person Data (Decoded):".green);
-            console.log(JSON.stringify(personData));
+            
             // successful. return data back to frontend
             res.jsonp({
               status: "OK",
