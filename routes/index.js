@@ -116,7 +116,7 @@ function callPersonAPI(accessToken, res) {
 
   console.log("AUTH_LEVEL:".green,_authLevel);
 
-  // validate and decode token to get UINFIN
+  // validate and decode token to get SUB
   var decoded = securityHelper.verifyJWS(accessToken, _publicCertContent);
   if (decoded == undefined || decoded == null) {
     res.jsonp({
@@ -128,16 +128,16 @@ function callPersonAPI(accessToken, res) {
   console.log("Decoded Access Token:".green);
   console.log(JSON.stringify(decoded));
 
-  var uinfin = decoded.sub;
-  if (uinfin == undefined || uinfin == null) {
+  var sub = decoded.sub;
+  if (sub == undefined || sub == null) {
     res.jsonp({
       status: "ERROR",
-      msg: "UINFIN NOT FOUND"
+      msg: "SUB NOT FOUND"
     });
   }
 
   // **** CALL PERSON API ****
-  var request = createPersonRequest(uinfin, accessToken);
+  var request = createPersonRequest(sub, accessToken);
 
   // Invoke asynchronous call
   request
@@ -290,8 +290,8 @@ function createTokenRequest(code) {
 }
 
 // function to prepare request for PERSON API
-function createPersonRequest(uinfin, validToken) {
-  var url = _personApiUrl + "/" + uinfin + "/";
+function createPersonRequest(sub, validToken) {
+  var url = _personApiUrl + "/" + sub + "/";
   var cacheCtl = "no-cache";
   var method = "GET";
 
