@@ -1,5 +1,7 @@
 export DEMO_APP_SIGNATURE_CERT_PRIVATE_KEY=./ssl/stg-demoapp-client-privatekey-2018.pem
-export MYINFO_SIGNATURE_CERT_PUBLIC_CERT=./ssl/stg-auth-signing-public.pem
+export MYINFO_SIGNATURE_CERT_PUBLIC_CERT=./ssl/pub.stg.consent.myinfo.gov.sg.cer
+
+
 
 export MYINFO_APP_CLIENT_ID=STG2-MYINFO-SELF-TEST
 export MYINFO_APP_CLIENT_SECRET=44d953c796cccebcec9bdc826852857ab412fbe2
