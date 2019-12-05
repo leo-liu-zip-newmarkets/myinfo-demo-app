@@ -1,6 +1,6 @@
 @ECHO off
 set DEMO_APP_SIGNATURE_CERT_PRIVATE_KEY=./ssl/stg-demoapp-client-privatekey-2018.pem
-set MYINFO_SIGNATURE_CERT_PUBLIC_CERT=./ssl/pub.stg.consent.myinfo.gov.sg.cer
+set MYINFO_SIGNATURE_CERT_PUBLIC_CERT=./ssl/staging_myinfo_public_cert.cer
 
 set MYINFO_APP_CLIENT_ID=STG2-MYINFO-SELF-TEST
 set MYINFO_APP_CLIENT_SECRET=44d953c796cccebcec9bdc826852857ab412fbe2
