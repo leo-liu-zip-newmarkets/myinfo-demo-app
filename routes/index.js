@@ -1,4 +1,5 @@
 var express = require('express');
+var cors = require('cors')
 var router = express.Router();
 
 const restClient = require('superagent-bluebird-promise');
@@ -38,7 +39,9 @@ var _authApiUrl = process.env.MYINFO_API_AUTHORISE;
 var _tokenApiUrl = process.env.MYINFO_API_TOKEN;
 var _personApiUrl = process.env.MYINFO_API_PERSON;
 
-var _attributes = "uinfin,name,sex,race,nationality,dob,email,mobileno,regadd,housingtype,hdbtype,marital,edulevel,noa-basic,ownerprivate,cpfcontributions,cpfbalances";
+var _attributes = "name,hanyupinyinname,dob,mobileno,email,regadd";
+
+router.all('*', cors());
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -69,9 +72,12 @@ router.get('/getEnv', function(req, res, next) {
 });
 
 // function for frontend to call backend
-router.post('/getPersonData', function(req, res, next) {
+router.post('/getPersonData', cors(), function(req, res, next) {
   // get variables from frontend
   var code = req.body.code;
+  if(req.body.attributes != undefined && req.body.attributes != null){
+    _attributes = req.body.attributes;
+  }
 
   var data;
   var request;
